@@ -251,11 +251,22 @@ public class Properties
             
             String token = st.nextToken();
             
-            if ((token.contains("%")) && (token.split("%").length==2))
+            if (token.contains("%"))
                 {
                 
-                String id    = token.split("%")[0];
-                String label = token.split("%")[1];
+                String id;
+                String label;
+                
+                if (token.split("%").length==2)
+                    {
+                    id    = token.split("%")[0];
+                    label = token.split("%")[1];
+                    }
+                else
+                    {
+                    id    = token.split("%")[0];
+                    label = "Missing Label";
+                    }
                 
                 this.sedex_recipient_ids.add(id);
                 this.sedex_recipient_labels.add(label);
@@ -263,13 +274,19 @@ public class Properties
             else
                 {
                 String id    = token;
-                String label = "";
+                String label = "Missing Label";
                 
                 this.sedex_recipient_ids.add(id);
                 this.sedex_recipient_labels.add(label);
                 }
             
             }
+        
+        for(int i=0;i<this.sedex_recipient_ids.size();i++)
+            {
+            System.out.println(i+": "+this.sedex_recipient_ids.get(i)+" -> "+this.sedex_recipient_labels.get(i));
+            }
+            
             
         this.sedex_dir_outbox        = sedex_dir_outbox;
         this.sedex_dir_receipts      = sedex_dir_receipts;

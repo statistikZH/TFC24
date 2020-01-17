@@ -37,7 +37,7 @@ public class PropertiesReader
      * @return           Properties to be used.
      * @throws Exception The properties cannot be extracted.
      */
-    public static Properties get_proberties() throws Exception
+    public static Properties get_properties() throws Exception
         
         {
         

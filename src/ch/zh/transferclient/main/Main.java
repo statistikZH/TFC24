@@ -68,7 +68,7 @@ public class Main
                     }
                 });
             
-            Properties properties         = PropertiesReader.get_proberties();
+            Properties properties         = PropertiesReader.get_properties();
             
             // Logger einrichten
             boolean    log_overwrite      = properties.get_log_overwrite();
