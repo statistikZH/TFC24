@@ -282,11 +282,6 @@ public class Properties
             
             }
         
-        for(int i=0;i<this.sedex_recipient_ids.size();i++)
-            {
-            System.out.println(i+": "+this.sedex_recipient_ids.get(i)+" -> "+this.sedex_recipient_labels.get(i));
-            }
-            
             
         this.sedex_dir_outbox        = sedex_dir_outbox;
         this.sedex_dir_receipts      = sedex_dir_receipts;
