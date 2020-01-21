@@ -43,6 +43,7 @@ public class PropertiesReader
         
         Extract extract                        = new Extract();
         
+        String  delay_string                   = extract.get_delay();
         String  zip_compression_string         = extract.get_zip_compression();
         
         String  log_overwrite_string           = extract.get_log_overwrite();
@@ -65,6 +66,17 @@ public class PropertiesReader
         // --------------------------------------//
         // Validierungen der extrahierten Werte //
         // --------------------------------------//
+        
+        // Delay
+        long delay = 10;
+        try 
+            {
+            delay = Long.valueOf(delay_string);
+            }
+        catch(Exception e)
+            {
+            delay = 10;
+            }
         
         // ZIP compression testen
         boolean zip_compression                = true;
@@ -281,7 +293,7 @@ public class PropertiesReader
             number_of_table_entries = 1;
             }
             
-        Properties properties = new Properties(zip_compression, log_overwrite, log_suppress_debug, archive_datafiles, language, sedex_sender_id, sedex_recipient_id, sedex_dir_outbox, sedex_dir_receipts, folder_results, target_time, number_of_table_entries);
+        Properties properties = new Properties(delay, zip_compression, log_overwrite, log_suppress_debug, archive_datafiles, language, sedex_sender_id, sedex_recipient_id, sedex_dir_outbox, sedex_dir_receipts, folder_results, target_time, number_of_table_entries);
         
         return properties;
         

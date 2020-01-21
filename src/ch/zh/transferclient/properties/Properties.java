@@ -40,6 +40,10 @@ public class Properties
         RM
     };
     
+    /** The delay in milliseconds between the termination of one execution and the commencement of the next. */
+    private final long              delay;                    // Konfigurierbar im Konfigurationsfile
+    
+    
     /** Indicator which indicates whether the files should be compressed or not. */
     private final boolean           zip_compression;          // Konfigurierbar im Konfigurationsfile
     
@@ -84,9 +88,20 @@ public class Properties
     /** Number of table entries. */
     private final int               number_of_table_entries;  // Konfigurierbar im Konfigurationsfile
     
-    // ------------------------//
+    // -----------------------//
     // Zugriff auf Konstanten //
-    // ------------------------//
+    // -----------------------//
+    /**
+     * @return Delay in milliseconds between the termination of one execution and the commencement of the next.
+     */
+    public long get_delay()
+        {
+        return this.delay;
+        }
+    
+    /**
+     * @return Indicator which indicates whether the files should be compressed or not.
+     */
     public boolean get_zip_compression()
         {
         return this.zip_compression;
@@ -195,6 +210,7 @@ public class Properties
     /**
      * Constructs a new properties object.
      * 
+     * @param delay                   Delay in milliseconds between the termination of one execution and the commencement of the next.
      * @param zip_compression         Indicator which indicates whether the files should be compressed or not.
      * 
      * @param log_overwrite           Indicator which indicates whether the log should be overwritten for every new
@@ -218,6 +234,7 @@ public class Properties
     protected Properties
     /* @formatter:off */
         (
+        long    delay,
         boolean zip_compression,
         boolean log_overwrite,
         boolean log_suppress_debug,
@@ -234,6 +251,7 @@ public class Properties
         /* @formatter:on */
         {
         
+        this.delay                  = delay;
         this.zip_compression        = zip_compression;
         
         this.log_overwrite          = log_overwrite;

@@ -32,6 +32,9 @@ public class Extract
     
     {
     
+    /** Delay in milliseconds between the termination of one execution and the commencement of the next. */
+    private final String delay;
+    
     /** Indicator which indicates whether the files should be compressed or not. */
     private final String zip_compression;
     
@@ -69,7 +72,15 @@ public class Extract
     
     /** The number of table entries. */
     private final String number_of_table_entries;
-        
+    
+    /**
+     * @return Delay in milliseconds between the termination of one execution and the commencement of the next.
+     */
+    protected String get_delay()
+        {
+        return this.delay;
+        }
+    
     /**
      * @return Indicator which indicates whether the files should be compressed or not.
      */
@@ -166,6 +177,7 @@ public class Extract
     protected Extract() throws Exception
         {
         
+        String              delay                           = "";
         String              zip_compression                 = "";
         
         String              log_overwrite                   = "";
@@ -207,7 +219,14 @@ public class Extract
                     
                     String   parameter = paare[0].toLowerCase().trim();
                     
-                    if (parameter.equals("zip_compression"))
+                    if (parameter.equals("delay"))
+                        {
+                        if (paare.length > 1)
+                            {
+                            delay = paare[1].trim();
+                            }
+                        }
+                    else if (parameter.equals("zip_compression"))
                         {
                         if (paare.length > 1)
                             {
@@ -333,6 +352,7 @@ public class Extract
         r.close();
         stream.close();
         
+        this.delay                           = delay;
         this.zip_compression                 = zip_compression;
         
         this.log_overwrite                   = log_overwrite;

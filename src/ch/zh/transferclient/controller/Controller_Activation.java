@@ -157,7 +157,7 @@ public class Controller_Activation
                 {
                 Processing.process(controller.properties, controller.gui);
                 }
-            }, initialDelay, 10, TimeUnit.MILLISECONDS);
+            }, initialDelay, controller.properties.get_delay(), TimeUnit.MILLISECONDS);
         
         // --------------------------------------------------------------------------//
         // ExecutorService fuer sich nicht wiederholgende Aufgaben wird eingerichtet //

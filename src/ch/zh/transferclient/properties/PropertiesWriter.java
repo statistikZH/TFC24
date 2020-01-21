@@ -55,6 +55,18 @@ public class PropertiesWriter
             bw.newLine();
             bw.newLine();
             
+            bw.write("# DELAY ");
+            bw.newLine();
+            bw.write("# The transfer-client is based on polling, i.e. its main functionality is achieved by executing periodically a task.");
+            bw.newLine();
+            bw.write("# The parameter \"delay\" specifies the delay in milliseconds between the termination of one execution");
+            bw.newLine();
+            bw.write("# and the commencement of the next.");
+            bw.newLine();
+            bw.write("DELAY="+properties.get_delay());
+            bw.newLine();
+            bw.newLine();
+            
             bw.write("# ZIP_COMPRESSION ");
             bw.newLine();
             bw.write("# Default value: TRUE");
