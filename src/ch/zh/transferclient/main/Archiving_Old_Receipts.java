@@ -1,5 +1,5 @@
 /*
- * Copyright 2018-2019 Statistisches Amt des Kantons Zürich
+ * Copyright 2018-2020 Statistisches Amt des Kantons Zürich
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,12 +30,20 @@ import ch.zh.transferclient.properties.*;
 /**
  * This class is used to delete old receipts.
  *
- * @author  Daniel Bierer (Statistical Office of the Canton of Zurich)
+ * @author  Daniel Bierer (Statistisches Amt des Kantons Zürich)
  * @version 2.4
  */
 public class Archiving_Old_Receipts
     
     {
+    
+    /**
+     * Constructs a Archiving_Old_Receipts object.
+     */
+    private Archiving_Old_Receipts()
+        {
+      //see also https://stackoverflow.com/questions/31409982/java-best-practice-class-with-only-static-methods
+        }
     
     /**
      * Deletes all files within the sedex receipts folder.

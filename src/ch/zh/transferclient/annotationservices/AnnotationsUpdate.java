@@ -1,3 +1,19 @@
+/*
+ * Copyright 2018-2020 Statistisches Amt des Kantons Zürich
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package ch.zh.transferclient.annotationservices;
 
 import java.io.*;
@@ -8,7 +24,7 @@ import java.util.*;
 /**
  * The class is used to update systematically the author and version of all source files.
  * 
- * @author  Daniel Bierer (Statistical Office of the Canton of Zurich)
+ * @author  Daniel Bierer (Statistisches Amt des Kantons Zürich)
  * @version 2.4
  *
  */
@@ -16,7 +32,16 @@ public class AnnotationsUpdate
     {
     
     /**
-     * Updates the author and version of all source files.
+     * Constructs an AnnotationsUpdate object.
+     */
+    private AnnotationsUpdate()
+        {
+        //see also https://stackoverflow.com/questions/31409982/java-best-practice-class-with-only-static-methods
+        }
+    
+    
+    /**
+     * Updates the author and version of all source code files.
      * 
      * @param rootfolder The root folder to be used.
      * 
@@ -26,7 +51,7 @@ public class AnnotationsUpdate
         
         try
             {
-            Iterator<Path> it = Files.walk(Paths.get(rootfolder)).filter(p -> p.toString().endsWith(".java")).iterator();
+            Iterator<Path> it = Files.walk(Paths.get(rootfolder)).filter(p -> (p.toString().endsWith(".java") || p.toString().endsWith("package.html") )).iterator();
             
             while (it.hasNext())
                 {
@@ -42,14 +67,34 @@ public class AnnotationsUpdate
                 String            line  = br.readLine();
                 while ((line != null))
                     {
-                    if (line.contains("@author"))
+                    if (file.getName().endsWith(".java"))
                         {
-                        line = line.substring(0, line.indexOf("@author ") + 9) + AnnotationsMain.AUTHOR;
+                        if ((line.contains("* Copyright ")) && ((line.contains("Statistisches Amt des Kantons Zürich"))))
+                            {
+                            line = AnnotationsMain.LICENCEINFO_1FSTLINE;
+                            }
+                        if (line.contains("@author"))
+                            {
+                            line = AnnotationsMain.AUTHOR;
+                            }
+                        if (line.contains("@version"))
+                            {
+                            line = AnnotationsMain.VERSION;
+                            }
                         }
-                    if (line.contains("@version"))
+                    else if (file.getName().equals("package.html"))
                         {
-                        line = line.substring(0, line.indexOf("@version ") + 9) + AnnotationsMain.VERSION;
+                        if (line.contains("@author"))
+                            {
+                            line = AnnotationsMain.PACKAGES_HTML_AUTHOR;
+                            }
+                        if (line.contains("@version"))
+                            {
+                            line = AnnotationsMain.PACKAGES_HTML_VERSION;
+                            }
                         }
+                        
+                    
                     lines.add(line);
                     
                     line = br.readLine();
@@ -82,5 +127,5 @@ public class AnnotationsUpdate
             }
             
         }
-        
+    
     }

@@ -6,10 +6,31 @@ import java.io.OutputStreamWriter;
 
 import ch.zh.transferclient.main.Logger;
 
+/**
+ * 
+ * The class is used for simulating input files.
+ * 
+ * @author  Daniel Bierer (Statistisches Amt des Kantons Zürich)
+ * @version 2.4
+ *
+ */
 public class CreateTestInputs
     
     {
     
+    /**
+     * Constructs a CreateTestInputs object.
+     */
+    private CreateTestInputs()
+        {
+        //see also https://stackoverflow.com/questions/31409982/java-best-practice-class-with-only-static-methods
+        }
+    
+    /**
+     * Writes 1000 input files to the input folder.
+     * 
+     * @param args Command-line arguments.
+     */
     public static void main(String[] args)
         
         {
@@ -38,7 +59,13 @@ public class CreateTestInputs
             }
             
         }
-        
+    
+    
+    /**
+     * Writes a test input file.
+     * 
+     * @param filename The file name to be used.
+     */
     private static void write_file(String filename)
         {
         

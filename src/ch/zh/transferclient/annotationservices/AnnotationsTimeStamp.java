@@ -1,5 +1,5 @@
 /*
- * Copyright 2018-2019 Statistisches Amt des Kantons Zürich
+ * Copyright 2018-2020 Statistisches Amt des Kantons Zürich
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,12 +22,20 @@ import java.util.Date;
 /**
  * This class is used to generate time stamps for the backups.
  *
- * @author  Daniel Bierer (Statistical Office of the Canton of Zurich)
+ * @author  Daniel Bierer (Statistisches Amt des Kantons Zürich)
  * @version 2.4
  */
 public class AnnotationsTimeStamp
     
     {
+    
+    /**
+     * Constructs an AnnotationsTimeStamp object.
+     */
+    private AnnotationsTimeStamp()
+        {
+        //see also https://stackoverflow.com/questions/31409982/java-best-practice-class-with-only-static-methods
+        }
     
     /**
      * Date format to be used for the time stamp.

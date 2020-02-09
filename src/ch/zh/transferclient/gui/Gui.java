@@ -1,5 +1,5 @@
 /*
- * Copyright 2018-2019 Statistisches Amt des Kantons Zürich
+ * Copyright 2018-2020 Statistisches Amt des Kantons Zürich
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -31,7 +31,7 @@ import ch.zh.transferclient.properties.Properties.Language;
 /**
  * This class is used to produce a graphical user interface.
  *
- * @author  Daniel Bierer (Statistical Office of the Canton of Zurich)
+ * @author  Daniel Bierer (Statistisches Amt des Kantons Zürich)
  * @version 2.4
  */
 public class Gui extends JFrame
@@ -509,8 +509,8 @@ public class Gui extends JFrame
      * http://www.fredosaurus.com/notes-java/GUI/events/inner_class_listener.html
      * 
      *
-     * @author             Daniel Bierer (Statistical Office of the Canton of Zurich)
-     * @version            2.4
+ * @author  Daniel Bierer (Statistisches Amt des Kantons Zürich)
+ * @version 2.4
      * 
      * @param   properties Reference of the properties object to be used.
      * @return             The manufactured GUI object.

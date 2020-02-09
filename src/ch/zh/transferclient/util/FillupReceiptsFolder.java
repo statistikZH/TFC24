@@ -6,10 +6,30 @@ import java.io.OutputStreamWriter;
 
 import ch.zh.transferclient.main.Logger;
 
+/**
+ * The class is used for simulating receipts.
+ * 
+ * @author  Daniel Bierer (Statistisches Amt des Kantons Zürich)
+ * @version 2.4
+ *
+ */
 public class FillupReceiptsFolder
     
     {
     
+    /**
+     * Constructs a FillupReceiptsFolder object. 
+     */
+    private FillupReceiptsFolder()
+        {
+        //see also https://stackoverflow.com/questions/31409982/java-best-practice-class-with-only-static-methods
+        }
+    
+    /**
+     * Writes 1000 receipt files to the receipts folder.
+     * 
+     * @param args Command-line arguments.
+     */
     public static void main(String[] args)
         
         {
@@ -21,6 +41,12 @@ public class FillupReceiptsFolder
             
         }
         
+    /**
+     * Writes a receipt file.
+     * 
+     * @param sedex_message_id  Sedex Message ID to be used.
+     * @param empfaenger        Receiver to be used.
+     */
     private static void write_file(String sedex_message_id, String empfaenger)
         {
         

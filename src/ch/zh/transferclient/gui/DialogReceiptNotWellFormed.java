@@ -1,5 +1,5 @@
 /*
- * Copyright 2018-2019 Statistisches Amt des Kantons Zürich
+ * Copyright 2018-2020 Statistisches Amt des Kantons Zürich
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,7 +29,7 @@ import ch.zh.transferclient.properties.*;
 /**
  * This class is used to show a dialog which informs the user that a received sedex receipt file is not well formed.
  *
- * @author  Daniel Bierer (Statistical Office of the Canton of Zurich)
+ * @author  Daniel Bierer (Statistisches Amt des Kantons Zürich)
  * @version 2.4
  */
 public class DialogReceiptNotWellFormed extends JDialog implements MouseListener, WindowListener

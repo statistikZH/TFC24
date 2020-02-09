@@ -1,5 +1,5 @@
 /*
- * Copyright 2018-2019 Statistisches Amt des Kantons Zürich
+ * Copyright 2018-2020 Statistisches Amt des Kantons Zürich
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -28,12 +28,20 @@ import ch.zh.transferclient.properties.*;
 /**
  * This class is used to produce a protocol table.
  *
- * @author  Daniel Bierer (Statistical Office of the Canton of Zurich)
+ * @author  Daniel Bierer (Statistisches Amt des Kantons Zürich)
  * @version 2.4
  */
 public class FactoryTableProtocol_Overview
     
     {
+    
+    /**
+     * Constructs a FactoryTableProtocol_Overview object.
+     */
+    private FactoryTableProtocol_Overview()
+        {
+        //see also https://stackoverflow.com/questions/31409982/java-best-practice-class-with-only-static-methods
+        }
     
     /**
      * Produces the overview protocol table.

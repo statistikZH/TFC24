@@ -1,5 +1,5 @@
 /*
- * Copyright 2018-2019 Statistisches Amt des Kantons Zürich
+ * Copyright 2018-2020 Statistisches Amt des Kantons Zürich
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,14 +21,23 @@ import java.awt.Font;
 import ch.zh.transferclient.main.*;
 
 /**
- * This class is used to deactivate the transfer client.
+ * This class is used to deactivate the transfer-client.
  *
- * @author  Daniel Bierer (Statistical Office of the Canton of Zurich)
+ * @author  Daniel Bierer (Statistisches Amt des Kantons Zürich)
  * @version 2.4
  */
 public class Controller_Deactivation
     
     {
+    
+    /**
+     * Constructs a Controller_Deactivation object.
+     */
+    private Controller_Deactivation()
+        {
+        //see also https://stackoverflow.com/questions/31409982/java-best-practice-class-with-only-static-methods
+        }
+    
     
     /**
      * Deactivates the transfer client.

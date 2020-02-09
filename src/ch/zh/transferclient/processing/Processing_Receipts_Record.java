@@ -3,7 +3,7 @@ package ch.zh.transferclient.processing;
 /**
  * This class is used to construct receipts.
  * 
- * @author  Daniel Bierer (Statistical Office of the Canton of Zurich)
+ * @author  Daniel Bierer (Statistisches Amt des Kantons Zürich)
  * @version 2.4
  */
 public class Processing_Receipts_Record

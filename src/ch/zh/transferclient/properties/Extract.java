@@ -1,5 +1,5 @@
 /*
- * Copyright 2018-2019 Statistisches Amt des Kantons Zürich
+ * Copyright 2018-2020 Statistisches Amt des Kantons Zürich
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ import java.nio.charset.StandardCharsets;
 /**
  * This class is used to extract the properties from the properties file.
  * 
- * @author  Daniel Bierer (Statistical Office of the Canton of Zurich)
+ * @author  Daniel Bierer (Statistisches Amt des Kantons Zürich)
  * @version 2.4
  */
 public class Extract
@@ -170,7 +170,7 @@ public class Extract
         }
         
     /**
-     * Extracts the properties from the properties file.
+     * Constructs a Extract object (extracts the properties from the properties file).
      * 
      * @throws Exception Exception thrown if the properties cannot be extracted.
      */

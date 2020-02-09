@@ -1,5 +1,5 @@
 /*
- * Copyright 2018-2019 Statistisches Amt des Kantons Zürich
+ * Copyright 2018-2020 Statistisches Amt des Kantons Zürich
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -33,12 +33,21 @@ import ch.zh.transferclient.main.Logger;
  * This class is used to extract parameter values from an envelope file. The envelope files are evaluated in order to
  * inform the end user about the transfer status of a transmission.
  * 
- * @author  Daniel Bierer (Statistical Office of the Canton of Zurich)
+ * @author  Daniel Bierer (Statistisches Amt des Kantons Zürich)
  * @version 2.4
  */
 public class Processing_Receipts_ExtractElement
     
     {
+    
+    /**
+     * Constructs a Processing_Receipts_ExtractElement object.
+     */
+    private Processing_Receipts_ExtractElement()
+        {
+        //see also https://stackoverflow.com/questions/31409982/java-best-practice-class-with-only-static-methods
+        }
+    
     
     /**
      * Extracts parameter values from an envelope file.

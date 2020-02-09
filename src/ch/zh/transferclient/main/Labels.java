@@ -1,5 +1,5 @@
 /*
- * Copyright 2018-2019 Statistisches Amt des Kantons Zürich
+ * Copyright 2018-2020 Statistisches Amt des Kantons Zürich
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,12 +34,20 @@ import ch.zh.transferclient.properties.Properties.Language;
 /**
  * This class provides the labels depending on the selected language.
  *
- * @author  Daniel Bierer (Statistical Office of the Canton of Zurich)
+ * @author  Daniel Bierer (Statistisches Amt des Kantons Zürich)
  * @version 2.4
  */
 public class Labels
     
     {
+    
+    /**
+     * Constructs a Labels object.
+     */
+    private Labels()
+        {
+        //see also https://stackoverflow.com/questions/31409982/java-best-practice-class-with-only-static-methods
+        }
     
     /** Map with the labels. */
     private static final HashMap<String, String> LABELS = new HashMap<String, String>();

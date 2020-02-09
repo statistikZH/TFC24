@@ -1,5 +1,5 @@
 /*
- * Copyright 2018-2019 Statistisches Amt des Kantons Zürich
+ * Copyright 2018-2020 Statistisches Amt des Kantons Zürich
  * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,12 +22,20 @@ import ch.zh.transferclient.properties.*;
 /**
  * This class is used to exit the application.
  *
- * @author  Daniel Bierer (Statistical Office of the Canton of Zurich)
+ * @author  Daniel Bierer (Statistisches Amt des Kantons Zürich)
  * @version 2.4
  */
 public class Exit
     
     {
+    
+    /**
+     * Constructs an Exit object.
+     */
+    private Exit()
+        {
+        //see also https://stackoverflow.com/questions/31409982/java-best-practice-class-with-only-static-methods
+        }
     
     /**
      * Exits the application.
@@ -38,15 +46,15 @@ public class Exit
     public static void execute(Properties properties, Controller controller)
         {
         
-        // --------------------------------------------------//
+        // ----------------------------------------------//
         // WRITING THE PROPERTIES TO THE PROPERTIES-FILE //
-        // --------------------------------------------------//
+        // ----------------------------------------------//
         
         PropertiesWriter.write(properties);
         
-        // --------------------------------------------------//
+        // ------------------------------//
         // SHUTDOWN THE EXECUTOR-SERVICE //
-        // --------------------------------------------------//
+        // ------------------------------//
         //
         // The following text originates from
         // Source:
