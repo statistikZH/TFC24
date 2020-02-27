@@ -113,7 +113,7 @@ public class Processing_Receipts
                 // Falls die folgende Zeile die Exception "premature end of file"
                 // werfen sollte, wird das File nicht verschoben (da dann die 
                 // nachfolgenden Zeilen nicht ausgefuehrt werden). Dies bedeutet,
-                // dass der Executor-Thread, das File beim naechsten Durchgang 
+                // dass der Executor-Thread das File beim naechsten Durchgang 
                 // erneut im Sedex-Receipts-Ordner antreffen wird und erneut 
                 // versuchen wird, das File auszuwerten.
                 Document               doc     = builder.parse(file_receipt);
