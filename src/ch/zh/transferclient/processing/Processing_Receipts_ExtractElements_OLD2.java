@@ -36,14 +36,14 @@ import ch.zh.transferclient.main.Logger;
  * @author  Daniel Bierer (Statistisches Amt des Kantons Zürich)
  * @version 2.4
  */
-public class Processing_Receipts_ExtractElement
+public class Processing_Receipts_ExtractElements_OLD2
     
     {
     
     /**
      * Constructs a Processing_Receipts_ExtractElement object.
      */
-    private Processing_Receipts_ExtractElement()
+    private Processing_Receipts_ExtractElements_OLD2()
         {
         //see also https://stackoverflow.com/questions/31409982/java-best-practice-class-with-only-static-methods
         }
@@ -54,12 +54,12 @@ public class Processing_Receipts_ExtractElement
      *
      * @param  gui          The graphical user interface to be used.
      * @param  file_receipt The receipt file to be used.
-     * @param  element      The parameter whose value we want to know.
      * @return              The value of the parameter.
      */
-    protected synchronized static String extract_element(final Gui gui, final File file_receipt, final String element)
+    protected synchronized static Processing_Receipts_Record extract(final Gui gui, final File file_receipt)
         {
-        String                 status_code = "Not available";
+        String                 messageId  = "Not available";
+        String                 statusInfo = "Not available";
         
         DocumentBuilderFactory factory;
         DocumentBuilder        builder;
@@ -82,11 +82,13 @@ public class Processing_Receipts_ExtractElement
                 // In der folgenden Zeile wurde "equals" durch "contains"
                 // ersetzt, damit auch das alte Quittungsformat der
                 // Kantone Nidwalden und Obwalden verarbeitet werden kann.
-                if (node.getNodeName().contains(element))
-                    {
-                    
-                    status_code = node.getTextContent();
-                    
+                if (node.getNodeName().contains("messageId"))
+                    {                    
+                    messageId   = node.getTextContent(); 
+                    }
+                if (node.getNodeName().contains("statusInfo"))
+                    {                    
+                    statusInfo  = node.getTextContent(); 
                     }
                 }
                 
@@ -106,7 +108,9 @@ public class Processing_Receipts_ExtractElement
                 });
             }
             
-        return status_code;
+        Processing_Receipts_Record record = new Processing_Receipts_Record(messageId,statusInfo); 
+        
+        return record;
         }
         
     }

@@ -21,11 +21,6 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Vector;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-
-import org.w3c.dom.Document;
-
 import ch.zh.transferclient.gui.*;
 import ch.zh.transferclient.properties.Properties;
 
@@ -36,14 +31,14 @@ import ch.zh.transferclient.properties.Properties;
  * @author  Daniel Bierer (Statistisches Amt des Kantons Zürich)
  * @version 2.4
  */
-public class Processing_Receipts
+public class Processing_Receipts_OLD
     
     {
     
     /**
      * Constructs a Processing_Receipts object.
      */
-    private Processing_Receipts()
+    private Processing_Receipts_OLD()
         {
         //see also https://stackoverflow.com/questions/31409982/java-best-practice-class-with-only-static-methods
         }
@@ -101,85 +96,56 @@ public class Processing_Receipts
         for (int i = 0; i < size; i++)
             {
             
-            final File file_receipt = files[i];
+            final File                 file_receipt     = files[i];
+            
+            // Verschieben des Quittungsfiles ins Archiv
+            // Die Quittungsfiles werden ab Version 2.4
+            // des Transfer-Clients fortwährend ins
+            // Archiv verschoben. Dies hat den Vorteil,
+            // dass bereits verarbeitete Quittungen nicht mehr
+            // behandelt werden muessen.
             
             File file_receipt_copy = new File("archive/receipts/"+ file_receipt.getName());
             
-            try
+            while (true)
                 {
-                DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-                DocumentBuilder        builder = factory.newDocumentBuilder();
-                
-                // Falls die folgende Zeile die Exception "premature end of file"
-                // werfen sollte, wird das File nicht verschoben (da dann die 
-                // nachfolgenden Zeilen nicht ausgefuehrt werden). Dies bedeutet,
-                // dass der Executor-Thread, das File beim naechsten Durchgang 
-                // erneut im Sedex-Receipts-Ordner antreffen wird und erneut 
-                // versuchen wird, das File auszuwerten.
-                Document               doc     = builder.parse(file_receipt);
-                
-                // Falls der Executor die nachfolgende Zeile erreicht, heisst das,
-                // dass das Parsen erfolgreich war und jetzt versucht werden kann,
-                // das Receipt-File in den Archiv-Ordner zu verschieben.
-                // Hinweis:
-                // Die Quittungsfiles werden ab Version 2.4
-                // des Transfer-Clients fortwährend ins
-                // Archiv verschoben. Dies hat den Vorteil,
-                // dass bereits verarbeitete Quittungen nicht mehr
-                // behandelt werden muessen.
-                
                 try
                     {
                     
-                    Files.copy(file_receipt.toPath(), file_receipt_copy.toPath(), java.nio.file.StandardCopyOption.REPLACE_EXISTING);
-                    
-                    // Falls beim Kopieren in den Archiv-Folder etwas schief gehen sollte (vorhergehende Zeile),
-                    // wird noch nicht versucht werden, das File im Sedex-Receipts-Ordner zu loeschen, sondern 
-                    // beim naechsten Executor-Thread-Durchgang erneut ausgewertet. Falls das Kopieren jedoch 
-                    // erfolgreich war, wird versucht, das File im Sedex-Receipts-Ordner zu loeschen.
-                    
-                    try
-                        {
-                        Files.deleteIfExists(file_receipt.toPath());
-                        
-                        // Falls beim Loeschen des Receipt-Files im Sedex-Receipts-Ordner etwas
-                        // schief gehen sollte (vorhergehende Zeile), wird das Receipt noch nicht mit
-                        // den nachfolgenden zwei Zeilen registriert, sondern beim naechsten
-                        // Executor-Thread-Durchgang erneut ausgewertet.
-                        
-                        // Falls die Loeschung ohne Fehler duchgefuehrt werden konnte,
-                        // wird die Information des Receipts extrahiert und im 
-                        // Arbeitsspeicher abgelegt.
-                        Processing_Receipts_Record receipt = Processing_Receipts_ExtractElements.extract(doc,gui);
-                        RECEIPTS.add(receipt);
-                        }
-                    catch(Exception e)
-                        {
-                        // Beim Loeschen des Receipt-Files ist etwas schief gegangen.
-                        // Das Source-File bleibt in diesem Fall erhalten:
-                        // https://stackoverflow.com/questions/54347494/java-nio-file-files-move-operation
-                        // Beim naechsten Executor-Thread Durchlauf wird erneut versucht, 
-                        // das Receipt-File zu loeschen.
-                        }
-                    
+                    // Verschiebung der Quittung ins Archiv
+                    Files.move(file_receipt.toPath(), file_receipt_copy.toPath(), java.nio.file.StandardCopyOption.REPLACE_EXISTING);
+                    break;
                     }
-                catch(Exception e)
+                catch (Exception e)
                     {
-                    // Beim Versuch, das Receipt-File ins Archiv zu kopieren, ist etwas schief gelaufen.
-                    // Beim naechsten Executor-Thread-Durchlauf wird erneut versucht, 
-                    // das Receipt-File ins Archiv zu kopieren.
                     }
-                }
-            catch(Exception e)
-                {
-                // Beim Parsen des XML-Dokuments ist etwas schief gelaufen.
-                // Beim naechsten Executor-Thread-Durchlauf wird erneut versucht, das XML-Dokument zu parsen.
+                if (!files[i].exists())
+                    {
+                    break;
+                    }
                 }
             
+            
+            //Extraktion der Information aus dem verschobenen File.
+            //Die Extraktion findet bewusst basierend auf dem verschobenen File statt,
+            //um sicherzustellen, dass das File fertig geschrieben ist. 
+            //Wuerde die Extraktion vor dem Verschieben stattfinden, koennte
+            //das File noch nicht vollstaendig geschrieben sein, was in
+            //Experimenten am 2019-12-20 bewiesen worden ist.
+            //final String SEDEX_MESSAGE_ID = Processing_Receipts_ExtractElement.extract_element(gui, file_receipt_copy, "messageId");
+            //final String STATUS_INFO      = Processing_Receipts_ExtractElement.extract_element(gui, file_receipt_copy, "statusInfo");
+            
+            //Processing_Receipts_Record receipt = new Processing_Receipts_Record(SEDEX_MESSAGE_ID, STATUS_INFO);
+            
+            
+            Processing_Receipts_Record receipt = Processing_Receipts_ExtractElements_OLD.extract(gui,file_receipt_copy);
+            
+            RECEIPTS.add(receipt);
+                
             }
             
         Processing_Receipts_GUIUpdate.process_GUIUpdate(gui, sedex_recipient_ids, RECEIPTS);
         
         }
-    
+        
     }
